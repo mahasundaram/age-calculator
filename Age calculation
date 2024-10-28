@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Calculation</title>
+  <style>
+    body {
+      display: flex;
+      background-color: rgb(135, 128, 119);
+      margin: 0;
+    }
+    .container {
+      text-align: center;
+      padding: 20px;
+      border: 3px solid rgb(228, 220, 220);
+     
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    #result {
+      font-size: 18px;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Age Calculator</h1>
+    <label for="birthdate">Enter birthdate:</label>
+    <input type="date" id="birthdate">
+    <button onclick="calculateAge()">Calculate Age</button>
+    <p id="result"></p>
+  </div>
+  <script>
+    function calculateAge() {
+      const birthdate = document.getElementById('birthdate').value;
+
+      if (!birthdate) {
+        document.getElementById('result').textContent = 'Invalid date';
+        return;
+      }
+
+      const birthDateObj = new Date(birthdate);
+      const today = new Date();
+      let age = today.getFullYear() - birthDateObj.getFullYear();
+      const monthDiff = today.getMonth() - birthDateObj.getMonth();
+
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDateObj.getDate())) {
+        age--;
+      }
+
+      document.getElementById('result').textContent = `${age} years old`;
+    }
+  </script>
+</body>
+</html>
